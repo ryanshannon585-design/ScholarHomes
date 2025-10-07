@@ -4,12 +4,10 @@ As part of my fourth and final year of my Computing Course in Dublin City Univer
 
 ## Running The Application 
 
-You can run this application locally by;
+You can run this application locally by executing the following code;
 
-- Navigating to the ScholarHomes application:
- cd scholar home project \ src \ ScholarHomes
-- Execute the following to run the server:
- python3 manage.py runserver
+- cd scholar home project \ src \ ScholarHomes
+- python3 manage.py runserver
 
 Hello! I'm Ryan, nice to meet you:
 
