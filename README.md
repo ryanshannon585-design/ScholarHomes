@@ -1,29 +1,20 @@
-# CA472 template repo
+# Ryan Shannon, Final Year Project
 
-This is a template for CA472 projects.
+As part of my fourth and final year of my Computing Course in Dublin CIty University I was tasked with creating an application that I believed there was a niche in the Market for. As a college student, I wanted to create an application to remedy an issue close to my heart that continues to be relevant to this day, the student accommodation crisis. This application utilises social media elements to allow fellow students to connect with like minded peers and cohabitate in accommodation to both save money and secure accommodation for the year. On the git repository I have uploaded all my documentation throughout the year, definitively proofing the niche in the market using accredited sources. 
 
-## 1. Create your repo
+## Running The Application 
 
-One person from your project team should fork this repo, then add other teammates as project members on GitLab.
+You can run this application locally by;
 
-## 2. Name your repo appropriately
+- Navigating to the ScholarHomes application:
+ cd scholar home project \ src \ ScholarHomes
+- Execute the following to run the server:
+ python3 manage.py runserver
 
-The name of your project repo must be of the form `2024-ca472-XXXXXXX`, where "`XXXXXXX`"
-should be replaced with your usernames (e.g. `2024-ca472-sblott-pclarke`).
+Hello! I'm Ryan, nice to meet you:
 
-It is the *name of your repo* which matters (not the name of your project).
-
-You can change the name of your repo on GitLab under:
-
-- Settings / General / Advanced / Change path
-
-It looks like this:
-
-![change-repo-path](./res/repo-change-path2023.png "Change repo path.")
-
-After you have read this file, you
-should replace all of this content with a README describing your own project.
+![change-repo-path](./res/repo-change-path2023.jfif "Picture of me")
 
 ## Additional resources
 
-- Repo [hygiene](https://gitlab.computing.dcu.ie/sblott/local-gitlab-documentation/blob/master/repo-hygiene.md)
+- Please message me on Linkedin for additional assistance [hygiene](https://www.linkedin.com/in/ryan-shannon-product-owner/)
