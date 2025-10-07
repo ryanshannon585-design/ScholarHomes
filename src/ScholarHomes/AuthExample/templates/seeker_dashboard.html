@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+Student Dashboard Page
+
+{% endblock %}
+{% block content %} 
+<div class="container">
+        <br>
+        <div class="p-5 mb-4 bg-light rounded-3">  <!-- Styling for a main section with padding and a light background -->
+                <div class="heading">
+                        <h2>Welcome, {{ user.student_profile.first_name }}!</h2>  <!-- Personalized welcome message using the user's first name from the student profile -->
+                </div>
+                <div class="divider"></div>  <!-- Visual divider for layout purposes -->
+                <br>
+
+                <h1 class="display-5 fw-bold">View our vast selection of properties</h1>  <!-- Section heading for property viewing -->
+                        <img src="../media/site-images/Housing_application.jpg" float="right" width=30% height=20% class="icon">  <!-- Image showcasing housing, floated to the right -->
+                        <br>
+                        <p class="col-md-8 fs-4">At ScholarHomes, we provide a diverse range of student-oriented accommodation listings tailored to meet the unique needs of our users. Our mission is to assist students in discovering safe and reliable housing options throughout their academic endeavors.</p>  <!-- Description of the service -->
+                        <br>
+                        <div class="motto"><p class="motto">Student Accommodation: for Students, by Students</p></div>  <!-- Motto for the service -->
+                        <br>
+                        <a href="/properties/"><button class="button-3" type="button">View Listings</button></a>  <!-- Button to view property listings -->
+
+        </div>
+
+
+
+        <div class="row align-items-md-stretch">  <!-- Row for flexibly aligned items -->
+          <div class="col-md-6">
+            <div class="h-100 p-5 text-white bg-dark rounded-3" back>
+              <h2>View Property Listings</h2>  <!-- Section heading for property listings -->
+              <div class="image-container">
+                <img src="../media/site-images/history.jpg" width="68%" height="50%" class="icon-box"></img>  <!-- Image related to property history -->
+              </div>
+              <br>
+              <p>View our exclusive list of student accommodation options listed by fellow students. Browse and use our built in filter functionalities to find the perfect accommodation for you.</p>  <!-- Description of property listing features -->
+              <a href="/properties/"><button class="btn btn-outline-light" type="button">View Availabilities</button></a>  <!-- Button to view available properties -->
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3">
+              <h2 text-align="center">Application History</h2>  <!-- Section heading for application history -->
+              <div class="image-container">
+                <img src="../media/site-images/applications.png" width="64%" height="50%"></img>  <!-- Image showing application related activity -->
+              </div>
+              <br>
+              <p>View all previous property applications you have submitted. Keep track during each step of the application process and take control of your student living.</p>  <!-- Description of application history functionality -->
+              <a href="/my_applications/"><button class="btn btn-outline-secondary" type="button">View Previous Applications</button></a>  <!-- Button to view past applications -->
+            </div>
+          </div>
+      </div>
+</div>
+<br>
+{% endblock content %} 

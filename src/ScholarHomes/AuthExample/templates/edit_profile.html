@@ -1,0 +1,47 @@
+<!-- This template is an exstension of the HTML and CSS in Base.html -->
+{% extends 'base.html' %}
+
+<!-- Title of the webpages -->
+{% block title %}
+<title>Applicant Declined</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="padding">
+            
+            <h2>Edit Profile</h2>
+            <div class="divider"></div>
+            <form method="post" enctype="multipart/form-data" class="profile-form">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>User Profile</legend>
+                    {{ user_profile_form.as_p }}
+                </fieldset>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+    </div> 
+
+    {% if user.is_student == False %}
+    <br>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="padding">
+                <fieldset>
+                    <legend>Properties</legend>
+                    {% for property_form in property_forms %}
+                    <div class="divider"></div>
+                        <div class="profile-form">
+                        {{ property_name }}
+                        {{ property_form.as_p }}
+                        </div>
+                    {% endfor %}
+                </fieldset>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!-- This template is an exstension of the HTML and CSS in Base.html -->
+{% extends 'base.html' %}
+
+<!-- Title of the webpages -->
+{% block title %}
+<title>Applicant Accepted<title>
+{% endblock %}
+
+<!-- Small content informing user applicant has been accepted -->
+{% block content %} 
+<div class="container">
+    <br>
+        <div class="h-100 p-5 bg-light border rounded-3" back>
+            <h1>Applicant Accepted</h1>
+            <p>Congratulations! You have accepted the applicant.</p>
+            <br><br>
+            
+            <!-- Link back to property listings and to logout -->
+            <a  href="/properties/" class="btn btn-primary">View more properties</a>
+            <a href = "/logout/" class="btn btn-primary">Logout</a>
+        </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,45 @@
+<!-- This template is an exstension of the HTML and CSS in Base.html -->
+{% extends 'base.html' %}
+
+<!-- Title of the webpages -->
+{% block title %}Apply for Rent{%  endblock %}
+
+
+
+{% block content %}
+<!-- White background and container for context -->
+<div class="container">
+  <br>
+    <div class="p-5 mb-4 bg-light rounded-3">
+
+    <!-- Page heading -->
+    <div class="heading">
+      <h2>Apply for Rent</h2>
+    </div>
+
+    <!-- If the User is signed in and the is student attribute is true (affirming user is a property seeker) display the form -->
+    {% if user.is_authenticated and user.is_student %}
+    <form action="." method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+          <label for="exampleInputEmail1">*Please your message:</label><br>
+          {{ form.message }}<br>
+          <small id="emailHelp" class="form-text text-muted">This message will be sent to the property owner to be reviewed.</small>
+      </div>
+      <br><br>
+      <!-- Button submits form calling function in views.py -->
+      <button class="button" type="submit">Apply</button>
+      <br>
+      {{ form.errors }}
+    </form>
+
+
+    {% else %}
+    <!-- If student is not logged in or a seeker, display this button -->
+    <a class="apply-button" href="/login/">Login As a Student To Apply</a>
+    {% endif %}
+
+
+    </div>
+</div>
+{% endblock %}

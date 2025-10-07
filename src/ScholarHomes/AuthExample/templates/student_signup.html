@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Accommodation Seeker Registration
+
+{% endblock %}
+{% block content %} 
+    <div class="container">
+        <br>
+        <div class="p-5 mb-4 bg-light rounded-3">  <!-- Section with padding, margin, and rounded borders for styling -->
+            <div class="padding">
+                <div class="heading">
+                    <h2>Register as Accommodation Seeker</h2>  <!-- Heading for the registration section -->
+                </div>
+                <br>
+
+                <form action="." method="POST" enctype="multipart/form-data">  <!-- Form for registration, supports file uploads -->
+                    {% csrf_token %}  <!-- Security token to prevent CSRF attacks -->
+                    {{ user_form.as_p }}  <!-- Displays user form fields in paragraph format -->
+                    {{ profile_form.as_p }}  <!-- Displays profile form fields in paragraph format -->
+                    <br>
+                    <p>Have already an account? <a href="/login/" class="fw-bold text-body"><u>Login here</u></a></p>  <!-- Provides a link to login page if user already has an account -->
+                    <button class="button" type="submit">Register</button>  <!-- Submit button for the form -->
+                    {{ form.errors }}  <!-- Displays any form errors -->
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %} 
+
+
+
+
+
+
+
+
+

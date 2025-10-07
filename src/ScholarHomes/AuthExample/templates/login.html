@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <br>
+        <div class="p-5 mb-4 bg-light rounded-3">  <!-- Container with padding and margin for styling, rounded corners for aesthetics -->
+            <div class="padding">
+                <div class="login-form">  <!-- Encloses the login form elements -->
+                    <div class="heading">
+                        <h2>Please sign in</h2>  <!-- Form header with instructions -->
+                    </div>
+                    <br>
+                    
+                    
+                    <form action="." method="POST">  <!-- Form setup to post data to the same URL -->
+                        {% csrf_token %}  <!-- Security token to prevent CSRF attacks -->
+                        <div class="form-group"><label for="exampleInputEmail1">Username:</label><br>{{ form.username }}<br></div>  <!-- Username input field -->
+                        <br>
+                        <div class="form-group">Password:<br>{{ form.password }}</div>  <!-- Password input field -->
+                        {% if form.errors %}  <!-- Condition to check for form errors -->
+                            <p class="fw-bold text-body">Username or password is incorrect</p>  <!-- Error message display if there are form errors -->
+                        {% endif %}
+                        <br>
+                        <br>
+                        <button class="button" type="submit">Login</button>  <!-- Submit button for the form -->
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  <br>
+{% endblock %}

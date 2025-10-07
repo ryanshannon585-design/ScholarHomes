@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}
+
+Application Successful
+
+{% endblock %}
+{% block content %} 
+<div class="container">
+        <br>
+        <div class="h-100 p-5 bg-light border rounded-3">  <!-- Styling and layout for the main content area -->
+                <div class="heading"><h1>You have successfully registered to <b>ScholarHomes!</b></h1></div>  <!-- Heading indicating successful registration -->
+                <p class="col-md-8 fs-4">Your profile has now been created and is now active. Log in now to start your journey.</p>  <!-- Additional details about what the user can do next -->
+                <br><br>
+        
+        <a href="/properties/" class="btn btn-primary">View properties</a>  <!-- Button to view properties -->
+        <a href="/login/" class="btn btn-primary">Login</a>  <!-- Button to go to the login page -->
+        </div>
+</div>
+<br>
+{% endblock content %} 

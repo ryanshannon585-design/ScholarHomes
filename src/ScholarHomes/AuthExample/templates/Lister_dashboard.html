@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}
+PropOwner Dashboard Page
+
+{% endblock %}
+{% block content %}
+<div class="container">
+        <br>
+
+        <!-- First cell, generic home page 'view listing' cell -->
+        <div class="p-5 mb-4 bg-light rounded-3">
+                <div class="container-fluid py-5">
+
+                        <!-- Section for welcoming the user by name and introducing the main features of the site -->
+                        <div class="heading">
+                                <h2>Welcome, {{ user.student_profile.first_name }}!</h2>
+                        </div>
+                        <div class="divider"></div>
+                        <br>
+
+                        
+                        <h1 class="display-5 fw-bold">View our vast selection of properties</h1>
+                        <img src="../media/site-images/Housing_application.jpg" float="right" width=30% height=20% class="icon">
+                        <br>
+                        <p class="col-md-8 fs-4">At ScholarHomes, we provide a diverse range of student-oriented accommodation listings tailored to meet the unique needs of our users. Our mission is to assist students in discovering safe and reliable housing options throughout their academic endeavors.</p>
+                        <br>
+                        <div class="motto"><p class="motto">Student Accommodation: for Students, by Students</p></div>
+                        <br>
+                        <a  href="/properties/"><button class="button-3" type="button">View Listings</button></a>      
+                </div>
+                <br>
+        </div>
+
+        <!-- Row of cells below generic 'view listing cell' -->
+        <div class="row align-items-md-stretch">
+
+                <!-- Additional sections for specific actions available to the user (includes stylying )-->
+                <div class="col-md-6">
+                  <div class="h-100 p-5 text-white bg-dark rounded-3" back>
+                    <h2>See Your Applicants</h2>
+                    <div class="image-container">
+                      <img src="../media/site-images/interview.png" width="68%" height="50%" class="icon-box"></img>
+                    </div>
+                    <br>
+                    <p>See all applicants who have applied to your property listings and select a candidate that best suits you.</p>
+                    <a  href="/Listing_hub/"><button class="btn btn-outline-light" type="button">View Applicants/Listings</button></a>
+                  </div>
+                </div>
+
+                 <!-- Additional sections for specific actions available to the user (includes stylying )-->
+                <div class="col-md-6">
+                  <div class="h-100 p-5 bg-light border rounded-3" >
+                    <h2 text-align="center">Create a Property Listing</h2>
+                    <div class="image-container">
+                      <img src="../media/site-images/listing.png" width="64%" height="50%" class="icon-box"></img>
+                    </div>
+                    <br>
+                    <p>Create a detailed property listing that will be advertised to our student user based for free. Please include any relevant details in the listing.</p>
+                    <a  href="/CreateListing/"><button class="btn btn-outline-secondary" type="button">Create a Listing</button></a>
+                  </div>
+                </div>
+        </div>
+        
+        </div>
+        <br>
+{% endblock content %} 

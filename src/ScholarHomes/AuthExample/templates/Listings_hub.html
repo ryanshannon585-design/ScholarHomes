@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Owner Dashboard
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="heading"><h1>Welcome, {{ user.student_profile.first_name }}!</h1></div>
+    
+    <br><br><br>
+
+
+    <h2>Here Are Your Listed Properties:</h2>
+    {% if properties %}
+    {% for property in properties %}
+    <script>
+      var applicant_count = 0;
+    </script>
+    <br><div class="divider"></div><br>
+        <h3>{{ property.property_name }}</h3>
+        <br>
+        {% if property.image %}
+          <img src="{{ property.image.url }}" alt="Property Image" width="30%" height="Auto" class="image-section2">
+        {% else %}
+          <p>No image available</p>
+        {% endif %}
+        <div class="max-width">
+          <p><div class="bold">Property Description:</div>{{ property.description }}</p>
+          <p><div class="bold">Price:</div> ${{ property.price }}</p>
+        </div>
+
+        <!-- Delete property button -->
+        <form action="/delete_property/{{ property.id }}/" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-danger">Delete Property</button>
+        </form>
+        
+        <br><br>
+        <div class="application-section">
+          <h4>Applications for {{ property.property_name }}</h4>
+          {% for application in applications %}
+            {% if application.property == property %}
+              {% with applicant_count=applicant_count|add:"1" %}
+              {% endwith %}        
+              <div class="divider"></div>
+              <p><div class="bold">Applicant {{ forloop.counter }}:</div> {{ application.user.username }}</p>
+              <p><div class="bold">Message:</div> {{ application.message }}</p>
+              <p><div class="bold">Applicant Status:</div> {{ application.status }}</p>
+              <div class="buttons">
+                {% if application.property.ongoing == True and application.status != accepted %}
+                  <a class="btn btn-outline-success" href="/accept_applicant/{{ application.id }}">Accept</a>
+                {% endif %}
+                <a class="btn btn-outline-danger" href="/decline_applicant/{{ application.id }}">Decline</a>
+                <a class="btn btn-outline-light" href="/view_profile/{{ application.user.id }}">View Profile</a>
+              </div>
+              
+              <script>
+                var applicant_count = 1;
+              </script>
+            {% endif %}
+          {% endfor %}
+          <script>
+            // Writes no applicants should there be no applications for this property    
+              if (applicant_count === 0) {
+                  document.write('No applicants');
+                  
+              }
+          </script>
+        </div>
+
+
+      {% endfor %}
+
+      {% else %}
+      <br><div class="divider"></div><br>
+      <p>Currently there are no active listings on this account. Click <a class="blue-text" href="/CreateListing/">here</a> to create a listing!</p>
+      {% endif  %}
+  </div>
+</div>
+
+{% endblock %}

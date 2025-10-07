@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %} 
+Property Listings
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<br>
+
+ <!-- Section to filter property listings based on user input -->
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container">
+      <h2>Filter:</h2>  <!-- Header indicating this section is for filtering results -->
+      <form method="get" action="{% url 'property_list' %}">  <!-- Form that submits filter parameters via GET request to 'property_list' URL -->
+        <div class="image-section">
+          <label for="property_name" class="bold">Property Name:</label>  <!-- Label and input for property name filter -->
+          <input type="text" placeholder="e.g. Apartment for rent" aria-describedby="basic-addon1" name="property_name" class="form-control" value="{{ request.GET.property_name }}">
+          <br>
+          <label for="price" class="bold">Maximum Monthly Price (in euros):</label>  <!-- Label and input for maximum price filter -->
+          <input class="form-control" placeholder="e.g. 650" type="number" name="price" value="{{ request.GET.price }}">
+        </div>
+
+        <div class="text-section">
+          <label for="degree" class="bold">Lister's Degree:</label>  <!-- Label and select dropdown for filtering by lister's degree -->
+          <select class="form-control" name="degree">
+              <option value="">Any Degree</option>
+              {% for degree in all_degrees %}
+                  <option value="{{ degree.name }}">{{ degree.name }}</option>  <!-- Option values populated dynamically from all_degrees -->
+              {% endfor %}
+          </select>
+          <br>
+          <label for="university" class="bold">Lister's University:</label>  <!-- Label and select dropdown for filtering by lister's university -->
+          <select class="form-control" name="university">
+              <option value="">Any University</option>
+              {% for university in all_universities %}
+                  <option value="{{ university }}">{{ university }}</option>  <!-- Option values populated dynamically from all_universities -->
+              {% endfor %}
+          </select>
+        </div> 
+        
+         <!-- Submit button for the filter form -->
+        <br><br><br><br><br><br><br><br><button class="btn btn-success" fdprocessedid="sndqmn" type="submit">Filter</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Section to display filtered property listings -->
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <p class="bold">Number of Properties: <span class="text-primary font-italic me-1">{{ properties|length }}</span></p>  <!-- Displays the number of properties found -->
+    <div class="divider"></div>
+    <div class="products-container">
+      {% for property in properties %}  <!-- Loop through each property in the properties list -->
+      <div class="product">
+          <h2>{{ property.property_name }}</h2>  <!-- Display the name of the property -->
+          <div class="divider"></div>
+          {% if property.image %}
+            <div class="image-container"><img class="property_img" src="{{ property.image.url }}" alt="Property Image"></div>  <!-- Display the image of the property if available -->
+          {% else %}
+            No Image Available  <!-- Message shown if no image is available for the property -->
+          {% endif %}
+          <p><div class="bold">Monthly Rent:</div> ${{ property.price }}</p>  <!-- Display the monthly rent of the property -->
+          <p><div class="bold">Listing Created:</div> {{ property.created_at|date:"d/m/Y" }}</p>  <!-- Display the date the listing was created -->
+          <p><div class="bold">Views:</div> {{ property.view_count }}</p>  <!-- Display the number of views for the property -->
+          {% if request.user.is_authenticated %}
+            <a class="apply-button" href="/properties/{{property.id}}">View Property</a>  <!-- Link to view the property details, shown if the user is logged in -->
+          {% else %}
+          <a class="apply-button" href="/login">Please login to view</a>  <!-- Link to login page if user is not logged in -->
+          {% endif %}
+      </div>
+      {% if forloop.counter|divisibleby:2 %}
+        </div><div class="products-container">  <!-- Resets the container every 2 properties to maintain layout -->
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

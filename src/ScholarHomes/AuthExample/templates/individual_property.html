@@ -1,0 +1,90 @@
+<!-- Inherits from base template to maintain consistent layout and styles -->
+{% extends 'base.html' %}
+
+<!-- Sets the page title to "Property" -->
+{% block title %} Property {%  endblock %}
+
+
+{% block content %}
+<div class="container">
+    <br>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        
+        <!-- Displays the property name as a heading -->
+        <!-- Heading -->
+        <div class="heading">
+            <h2>{{property.property_name}}</h2>
+        </div>
+        <div class="divider"></div>
+            <br>
+
+            <!-- Displays the property image if it exists, otherwise shows a placeholder message -->
+            {% if property.image %}
+
+            <img src="{{ property.image.url }}" class="image-section2" alt="Your Image" width="75%" height="Auto">
+            
+            {% else %}
+
+            <p>No Image Available</p>
+
+            {% endif %}
+
+        <div class="text-section2">
+             <!-- Display various property details such as price, listing creation date, view count, and address -->
+            <p><div class="bold">Monthly Rent:</div> ${{ property.price }}</p>
+            <p><div class="bold">Listing Created:</div> {{ property.created_at|date:"d/m/Y" }}</p>
+            <p><div class="bold">Views:</div> {{ property.view_count }}</p>
+            <p><div class="bold">Address:</div> {{ property.get_full_address }}</p>
+        </div>
+        
+        <div class="clear-section"></div>
+          <!-- Detailed description of the property -->
+        <div class="description">
+            <p><div class="bold">Property Description:</div>{{ property.description }}</p>
+        </div>
+            <br>
+            <br>
+
+            <!-- If there's an address, display google map -->
+            
+            {% if property.address_line_1 %}
+            <div class="divider"></div>
+            <div class="heading">
+                <h2>Find Us On Google Maps:</h2>
+            </div>
+            <br>
+            <div style="width: 100%; display: flex; justify-content: center;">
+                <div style="width: 65%; height: 520px; display: flex; justify-content: center; align-items: center; background-color: #dadada; border-radius: 15px; overflow: hidden;">
+                    <iframe
+                        width="600"
+                        height="450"
+                        frameborder="0"
+                        style="border:0; max-width: 100%; max-height: 100%;"
+                        src="https://www.google.com/maps/embed/v1/place?q={{ property.address_line_1|urlencode }},{{ property.address_line_2|urlencode }},{{ property.city|urlencode }},{{ property.post_code|urlencode }}, Ireland&key=AIzaSyCxoi1AJYzWer8U-5nJo5NjQRzkKo1pAdQ"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            
+            
+            
+            {% endif %}
+
+            <br><br>
+            <a class="apply-button" href="/view_profile/{{ property.user.id }}">Lister Profile</a>
+            <br>
+
+            <!-- Displays an application button based on user status and whether they have already applied to this property -->
+            {% if user.is_authenticated and user.is_student %}
+                {% if user_already_applied %}
+                <a class="apply-button" href="/my_applications/">You have already applied for this property, Click here to check application history.</a>
+                    {% else %}
+                <a class="apply-button" href="{% url 'apply_for_rent' property.id %}">Apply for Rent</a>
+                {% endif %}
+            {% else %}
+                <a class="apply-button" href="/login/">Login As a Student Seeker To Apply</a>
+            {% endif %}
+        
+    </div>
+</div>
+{% endblock %}

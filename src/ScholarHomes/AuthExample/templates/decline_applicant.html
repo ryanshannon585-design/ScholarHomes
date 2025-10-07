@@ -1,0 +1,24 @@
+<!-- This template is an exstension of the HTML and CSS in Base.html -->
+{% extends 'base.html' %}
+
+<!-- Title of the webpages -->
+{% block title %}
+<title>Applicant Declined</title>
+{% endblock %}
+
+<!-- Small amount of content saying that the application has been declined -->
+{% block content %} 
+<div class="container">
+        <br>
+        <div class="h-100 p-5 bg-light border rounded-3" back>
+            <h1>Applicant Declined</h1>
+            <p>You have declined the applicant. The applicant will be notified</p>
+            <br><br>
+                
+                <!-- Link back to property listings and to logout -->
+                <a  href="/properties/" class="btn btn-primary">View more properties</a>
+                <a href = "/logout/" class="btn btn-primary">Logout</a>
+        </div>
+</div>
+{% endblock %}
+

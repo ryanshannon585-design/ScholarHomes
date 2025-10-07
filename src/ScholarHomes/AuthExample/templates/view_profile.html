@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% block title %} 
+My Profile
+{% endblock %}
+
+{% block content %}
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-4">
+          
+          <!-- First card in the top left of the screen-->
+          <div class="card mb-4">
+            <div class="card-body text-center">
+
+              <!-- Displays profile image if uploaded -->
+              {% if user.student_profile.profile_image %}
+                <img src="{{ user.student_profile.profile_image.url }}" alt="profile image"
+                  class="rounded-circle img-fluid" style="width: 150px;">
+              {% else %}
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                  class="rounded-circle img-fluid" style="width: 150px;">
+              {% endif %}
+
+              <h5 class="my-3">{{ user.username }} </h5>
+              <p class="text-muted mb-1">{{ user.student_profile.university }}</p>
+              <!-- State type of user (lister/seeker) -->
+              {% if user.is_student == False %}
+                <p class="text-muted mb-1">Lister</p>
+              {% else %}
+                <p class="text-muted mb-1">Seeker</p>
+              {% endif %}
+
+              
+              
+              <div class="d-flex justify-content-center mb-2">
+                {% if user != request.user %}
+                  {% if is_following %}
+                      <form action="{% url 'unfollow_user' user.id %}" method="post">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-primary">Unfollow</button>
+                      </form>
+                  {% else %}
+                      <form action="{% url 'follow_user' user.id %}" method="post">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-primary">Follow</button>
+                      </form>
+                     
+                  {% endif %}
+                {% else %}
+                  {% if user.is_authenticated %}
+                    <a class="nav-link" href="/edit_profile/"><button type="submit" class="btn btn-primary">edit profile</button></a>
+                  {% endif %}
+                {% endif %}
+              </div>
+
+
+            </div>
+          </div>
+
+          
+          <!-- Section that contains all links, will appear empty if left blank -->
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body p-0">
+              <div class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <div class="text-section"><a href="{% url 'following' user.id %}"><span class="text-primary font-italic me-1">Following:</span></a> {{ user.following_count }}</div>
+                <div class="image-section"><a href="{% url 'followers' user.id %}"><span class="text-primary font-italic me-1">Followers:</span></a> {{ user.followers_count }}</div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                {% if user.student_profile.facebook_link %}
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fas fa-globe fa-lg text-warning"></i>
+                  <p class="mb-0">
+                     <a class="blue-text" href="{{ user.student_profile.facebook_link }}">{{ user.student_profile.facebook_link }}</a>
+                  </p>
+                </li>
+                {% endif %}
+                {% if user.student_profile.instagram_link %}
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fas fa-globe fa-lg text-warning"></i>
+                  <p class="mb-0">
+                     <a class="blue-text" href="{{ user.student_profile.instagram_link }}">{{ user.student_profile.instagram_link }}</a>
+                  </p>
+                </li>
+                {% endif %}
+                {% if user.student_profile.linkedin_link %}
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fas fa-globe fa-lg text-warning"></i>
+                  <p class="mb-0">
+                     <a class="blue-text" href="{{ user.student_profile.linkedin_link }}">{{ user.student_profile.linkedin_link }}</a>
+                  </p>
+                </li>
+                {% endif %}
+                {% if user.student_profile.personal_page_link %}
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fas fa-globe fa-lg text-warning"></i>
+                  <p class="mb-0">
+                     <a class="blue-text" href="{{ user.student_profile.personal_page_link }}">{{ user.student_profile.personal_page_link }}</a>
+                  </p>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Section containg relevant user details, i.e name, degree, e.t.c -->
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.student_profile.first_name }} {{ user.student_profile.last_name }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.student_profile.email }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Phone</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.student_profile.phone_number }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Age</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.student_profile.calculate_age}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">University</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.student_profile.university }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Degree</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.student_profile.degree }}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+            <!-- Bio Section, allows students flexibility to display any information they feel is appropriate -->
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <p class="mb-4"><span class="text-primary font-italic me-1">Bio:</span>
+                  </p>
+                  <p>{{ user.student_profile.bio }}</p>
+        
+
+                </div>
+              </div>
+            </div>
+
+
+            {% if not user.is_student %}
+            <div class="card mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <p class="mb-4">Current Ongoing Property Listings: <span class="text-primary font-italic me-1">
+                    {% if properties %}
+                      {{ properties.count }}
+                    {% else %}
+                      0
+                    {% endif %}
+                  </span>
+                  </p>
+                  
+                  {% for property in properties %}
+                    <br><div class="divider"></div><br>
+                        <h3>{{ property.property_name }}</h3>
+                        {% if property.image %}
+                          <div class="image-section">
+                            <img src="{{ property.image.url }}" alt="Property Image" width="80%" height="Auto">
+                          </div>
+                            {% else %}
+                          <p>No image available</p>
+                        {% endif %}
+                        <div class="text-section">
+                          <p><div class="bold">Listing Created:</div> {{ property.created_at|date:"d/m/Y" }}</p>
+                          <p><div class="bold">Views:</div> {{ property.view_count }}</p>
+                          <p><div class="bold">Price:</div> ${{ property.price }}</p>
+                          <a class="apply-button" href="/properties/{{property.id}}">View Property</a>
+                        </div>
+                  {% endfor %}
+                  
+
+
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          
+        </div>
+      </div>
+    </div>
+{% endblock %}

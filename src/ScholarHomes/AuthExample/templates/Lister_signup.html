@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Accommodation Lister Registration
+{% endblock %}
+{% block content %} 
+    <div class="container">
+        <br>
+         <!-- Styling for the form area with padding, margin, and rounded corners -->
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="padding">
+                 <!-- Heading for the registration form -->
+                <div class="heading">
+                    <h2>Register as Accommodation Lister</h2>
+                </div>
+                <br>
+                <!-- Form setup for POST method with file upload capability -->
+                <form action="." method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}  <!-- Security token to prevent CSRF attacks -->
+                    {{ user_form.errors }}  <!-- Displays errors related to the user form if any -->
+                    {{ profile_form.errors }}  <!-- Displays errors related to the profile form if any -->
+                    {{ user_form.as_p }}  <!-- Renders user form fields as paragraph elements -->
+                    {{ profile_form.as_p }}  <!-- Renders profile form fields as paragraph elements -->
+                    <br>
+                    <p>Have already an account? <a href="/login/"class="fw-bold text-body"><u>Login here</u></a></p>  <!-- Link to login page for existing users -->
+                <button class="button" type="submit">Register</button>  <!-- Submit button for the form -->
+                </form>
+                
+            </div>
+        </div>
+    </div>
+{% endblock content %} 

@@ -1,0 +1,57 @@
+<!-- This template is an exstension of the HTML and CSS in Base.html -->
+{% extends 'base.html' %}
+
+<!-- Title of the webpage -->
+{% block title %} Homepage {%  endblock %}
+
+{% block content %} 
+<div class="container">
+    <br>
+    <div class="p-5 mb-4 bg-light rounded-3">
+      
+        <!-- First container, displayed accross all dashboards -->
+        <div class="container-fluid py-5">
+          <h1 class="display-5 fw-bold">View our vast selection of properties</h1>
+          <img src="../media/site-images/Housing_application.jpg" float="right" width=30% height=20% class="icon">
+          <br>
+          <p class="col-md-8 fs-4">At ScholarHomes, we provide a diverse range of student-oriented accommodation listings tailored to meet the unique needs of our users. Our mission is to assist students in discovering safe and reliable housing options throughout their academic endeavors.</p>
+          <br>
+          <div class="motto"><p class="motto">Student Accommodation: for Students, by Students</p></div>
+          <br>
+          <a  href="/properties/"><button class="button-3" type="button">View Listings</button></a>
+        </div>
+
+      </div>
+    
+      <!-- Creates row for cells -->
+      <div class="row align-items-md-stretch">
+        <!-- First cell 'Register as accommodation lister' -->
+        <div class="col-md-6">
+          <div class="h-100 p-5 text-white bg-dark rounded-3" back>
+            <h2>Accommodation Lister</h2>
+            <div class="image-container">
+              <img src="../media/site-images/propertyowners.jpg" width="68%" height="50%" class="icon-box"></img>
+            </div>
+            <br>
+            <p>Register as a accommodation lister and advertise your property listings completely free. Please ensure your property is suitable for student living and abides by ScholarHomes standards.</p>
+            <a  href="/registerPropLister/"><button class="btn btn-outline-light" type="button">Register as a Accommodation Lister</button></a>
+          </div>
+        </div>
+
+        <!-- Second cell 'Register as accommodation seeker' -->
+        <div class="col-md-6">
+          <div class="h-100 p-5 bg-light border rounded-3" >
+            <h2 text-align="center">Accommodation Seeker</h2>
+            <div class="image-container">
+              <img src="../media/site-images/students.jpg" width="64%" height="50%" class="icon-box"></img>
+            </div>
+            <br>
+            <p>Register as a accommodation seeker and browse our exclusive collection of student accommodation. With a wide range of options varying in price and location, take control of your education journey.</p>
+            <a  href="/registerstudent/"><button class="btn btn-outline-secondary" type="button">Register as a Accommodation Seeker</button></a>
+          </div>
+        </div>
+        
+    </div>
+</div>
+<br>
+{% endblock %}

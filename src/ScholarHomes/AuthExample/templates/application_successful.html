@@ -1,0 +1,24 @@
+<!-- This template is an exstension of the HTML and CSS in Base.html -->
+{% extends 'base.html' %}
+
+<!-- Title of the webpages -->
+{% block title %}
+Application Successful
+{% endblock %}
+
+<!-- Small content informing user application has been sent -->
+{% block content %} 
+<div class="container">
+        <br>
+        <div class="h-100 p-5 bg-light border rounded-3" back>
+                <div class="heading"><h1>Your application has successfully been sent!</h1></div>
+                <p class="col-md-8 fs-4">Your application has now been sent to the property owner to be reviewed. If they're interested in your application, they will contact you to discuss further.</p>
+                <br><br>
+                
+                <!-- Link back to property listings and to logout -->
+                <a  href="/properties/" class="btn btn-primary">View more properties</a>
+                <a href = "/logout/" class="btn btn-primary">Logout</a>
+        </div>
+</div>
+<br>
+{% endblock content %} 

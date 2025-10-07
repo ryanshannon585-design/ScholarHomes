@@ -1,0 +1,52 @@
+<!-- This template is an exstension of the HTML and CSS in Base.html -->
+{% extends 'base.html' %}
+
+<!-- Title of the webpages -->
+{% block title %}Create a listing{%  endblock %}
+
+
+{% block content %}
+<div class="container">
+  <br>
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="heading">
+      <!-- Page heading -->
+      <h2>Create a listing</h2>
+    </div>
+
+    <!-- If the user is signed in and a lister, show form -->
+    {% if user.is_authenticated and not user.is_student %}
+    <form action="." method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group"><label for="exampleInputEmail1">*Please provide a title for your property listing:</label><br>{{ form.property_name }}<br></div>
+      <br>
+      <div class="form-group">*Please provide a property description:<br>{{ form.description }}<br>
+        <small id="emailHelp" class="form-text text-muted">This message will be visible to applications, do not include any sensitive information.</small>
+      </div>
+      <br>
+      <div class="form-group"><label for="exampleInputEmail1">Upload a main image of your property:</label><br>{{ form.image }}<br>
+        <small id="emailHelp" class="form-text text-muted">Images are not required, but increases your listing's appeal.</small>
+      </div>
+      <br>
+      <div class="form-group">*Please enter a monthly renting fee (in euros):<br>{{ form.price }}</div>
+      <br>
+      <div class="form-group">*Address Line 1:<br>{{ form.address_line_1 }}</div>
+      <br>
+      <div class="form-group">*Address Line 2:<br>{{ form.address_line_2 }}</div>
+      <br>
+      <div class="form-group">*City:<br>{{ form.city }}</div>
+      <br>
+      <div class="form-group">*Post Code:<br>{{ form.post_code }}</div>
+      <br><br>
+      <button class="button" type="submit">Create Listing</button>
+      <br><br>
+      {{ form.errors }}
+   </form>
+
+    <!-- If not, ask the user to sign in as a lister -->
+    {% else %}
+    <a class="apply-button" href="/login/">Login As a Lister To Create a Listing</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

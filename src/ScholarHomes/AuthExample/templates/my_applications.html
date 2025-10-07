@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+  <div class="p-5 mb-4 bg-light rounded-3">  <!-- Container with padding and margin for styling, rounded corners for aesthetics -->
+    <div class="heading"><h1>Welcome, {{ user.student_profile.first_name }}!</h1></div>  <!-- Personalized welcome message using user's first name -->
+  
+    {% if applications %}  <!-- Checks if there are any applications to display -->
+    <h2>Here Are Your Pending Applications:</h2>
+    {% if error_msg %}  <!-- Checks for an error message -->
+      <br>
+      {{ error_msg }}  <!-- Displays the error message -->
+      <br>
+      
+      {% endif %}
+      {% for application in applications %}  <!-- Loops through each application -->
+      <br><div class="divider"></div><br>
+      <div class="padding">
+      <h3>Application {{ forloop.counter }}:</h3>  <!-- Displays the application number based on loop iteration -->
+        {% if application.property.image %}  <!-- Checks if there is an image for the property linked to the application -->
+          <img src="{{ application.property.image.url }}" alt="Property Image" width="30%" height="Auto" class="product-image">  <!-- Displays the property image -->
+        {% else %}
+          <p>No image available</p>  <!-- Message displayed if no image is available -->
+        {% endif %}
+          <br>
+          <div class="bold">Property:</div> {{ application.property.property_name }}<br><br>  <!-- Displays the property name -->
+          <div class="bold">Message:</div> {{ application.message }}<br><br>  <!-- Displays the message associated with the application -->
+          <div class="bold">Status:</div> {{ application.get_status_display }}<br><br>  <!-- Displays the readable status of the application -->
+          
+          {% if application.status == 'accepted' %}  <!-- Checks if the application status is 'accepted' -->
+            <div class="bold">Receipt:</div> {{ application.receipt_message }}<br><br>  <!-- Displays receipt message if the application is accepted -->
+            <div class="bold">Accepted On:</div> {{ application.accepted_at|date:"Y-m-d" }}<br><br>  <!-- Displays the date when the application was accepted -->
+          {% endif %}
+              
+          {% if request.user.is_authenticated %}  <!-- Checks if the user is logged in -->
+          {% if application.status  != 'accepted' %}
+          <form action="/delete_application/{{ application.id }}/" method="post">  <!-- Provides a form to delete the application -->
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-danger">Delete Application</button>  <!-- Button to submit the form for deleting the application -->
+          </form>
+          {% endif %}
+        <br>
+        <a class="button" href="/properties/{{application.property.id}}">View Property</a>  <!-- Link to view the property details -->
+        {% endif %}
+    </div>
+    {% endfor %}
+{% else %}
+  <p>You haven't applied for any properties yet.</p>  <!-- Message displayed if there are no applications -->
+{% endif %}
+</div>
+</div>
+{% endblock %}

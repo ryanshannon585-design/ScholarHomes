@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" type="image/x-icon" href="../media/site-images/Housing_application.jpg">
+  <!-- Title of the webpages, the block tags will be embeded 
+    with the content of templates that extend from base.html -->
+  <title>{% block title %}  {%  endblock %}</title>
+
+    <!-- manual styling contained, '!important' used where needed to override css of Bootstraps used -->
+    <style>
+        /* container used to align text */
+        .text-section {
+          float: left !important;
+          width: 45% !important;
+          padding: 20px;
+          box-sizing: border-box;
+          margin: auto 15px auto auto !important
+        }
+
+        /* container used to align image */
+        .image-section {
+          padding: 20px;
+          float: right !important;
+          width: 45% !important;
+          box-sizing: border-box;
+          margin: auto auto auto 15px !important;
+        } 
+
+        /* Secondary format to align text  */
+        .text-section2 {
+          float: left !important;
+          width: 355px !important;
+          padding: 20px;
+          box-sizing: border-box;
+          background-color: #dadada; 
+          margin: auto auto auto 15px;
+          display: block;
+          border-radius: 8px; /* Add rounded corners for a softer look */
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+          transition: transform 0.3s ease-in-out; /* a smooth transition effect */
+          margin: auto 15px auto auto !important
+        }
+
+        /* Secondary format to align image */
+        .image-section2 {
+          padding: 20px;
+          float: right !important; /* Remove this line if not needed */
+          width: 435px !important;
+          max-width: 100%; /* Ensure the image does not exceed the container width */
+          height: auto !important; /* Allow the image to resize proportionally */
+          box-sizing: border-box;
+          margin: auto 15px 15px auto !important; /* Adjust margins as needed */
+          border-radius: 8px; /* Add rounded corners for a softer look */
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+          transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+        }
+
+        /* Basic black box container */
+        .box{
+          margin: 100px;
+          border: 5px solid #000000;
+        }
+
+        /* Used to clear Align css and as a space break for the next section of content */
+        .clear-section {
+          clear: both; 
+          width: 10%;
+          height: 75px;
+        }
+
+        /* Average sized grey box container in the center of page, contains property descriptions */
+        .description {
+          width: 75% !important;
+          padding: 20px;
+          box-sizing: border-box;
+          background-color: #dadada; 
+          margin: auto auto auto 15px; 
+          display: block;
+          border-radius: 8px; /* adds rounded corners for a softer look */
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /*  subtle shadow for depth */
+          transition: transform 0.3s ease-in-out; /*  smooth transition effect */
+        }
+
+        /* Styling for log in form, font and alignment adjusted */
+        .login-form {
+            justify-content: center !important; 
+            width: 380px !important;
+            margin: 75px auto !important;
+            font-size: 25px !important;
+            font-family: 'Josefin Sans', sans-serif !important;
+        }
+
+        /* sets the font size for placeholder images, prevents text selection within them, and increases the font size for larger screens  */
+        .bd-placeholder-img {
+          font-size: 1.125rem; /* sets the font size of the placeholder image to 1.125 times the default font size */
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+
+        /* Background color and font styling of Navbar */
+        .navbar{
+            background-color: #5fc633;
+            color: white;
+        }
+        
+
+        /* Links made to be white */
+        a {
+            color: rgb(254, 254, 254) !important;
+        }
+        a:hover {
+            color: rgb(74, 74, 74) !important;
+        }
+        
+        /* Blue Links where needed */
+        a.blue-text {
+            color: hwb(230 11% 20%) !important;
+          }
+        a.blue-text:hover {
+          color: rgb(74, 74, 74) !important;
+        }
+
+        /* font styling of navbar dropdown menu */
+        .dropdown-item{
+          color: black !important;
+        }
+
+        /* Standard Button styling */
+        .button {
+          /* Set the background color to green */
+          background-color: #5fc633;
+          /* Add some padding for better visual appearance */
+          padding: 10px 20px;
+          /* Set text color to white */
+          color: white;
+          /* Add border-radius for rounded corners */
+          border-radius: 5px;
+          /* Display as inline-block for sizing */
+          display: inline-block;
+          /* Add cursor pointer to indicate interactivity */
+          cursor: pointer;
+          /* Add hover effect */
+          transition: background-color 0.3s ease;
+        }
+        /* Hover effect */
+        .button:hover {
+          background-color: #305521;
+        }
+
+        /* Profile form link styling (needs to be black to stand out against the white background) */
+        .profile-form a {
+            color: black !important; /* Set link color to black */
+        }
+        .profile-form a:hover {
+            color: rgb(68, 68, 68) !important; /* Set link color to black */
+        }
+
+        /* Sets text to bold */
+        .bold{
+          font-weight: bold;
+        }
+
+        /* Styling for  Logo Text in the navigation bar */
+        a.logo {
+          color: white;
+          font-size: 24px;
+          font-weight: bold;
+          font-style:normal;
+          text-decoration: none;
+        }
+
+        /* General styling for headings */
+        .heading {
+          margin: 1em 0 0.5em 0 !important;
+          font-weight: 100 !important;
+          text-align: center;
+          text-transform: uppercase !important;
+          color: #000000 !important;
+          font-style: italic !important;
+          font-family: 'Josefin Sans', sans-serif !important;
+          font-size: 58px !important;
+          line-height: 54px !important;
+          text-shadow: 2px 5px 0 rgba(127, 127, 127, 0.2) !important;
+          }
+        
+        /* sets up background image stored in our media folder, removes default margin and padding, 
+        ensures a minimum height equal to the viewport height, and utilizes Flexbox layout with a 
+        vertical stacking direction for its children. */
+        body {
+          background-image: url('../../media/site-images/background-3.jpg');
+          background-repeat: repeat !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          min-height: 100vh !important;
+          display: flex !important;
+          flex-direction: column !important;
+        }
+
+
+        /* footer alignment css, ensures it adapts to changing screen dimensions */
+        .content {
+            flex: 1;
+        }
+
+        /* General footer styling */
+        .footer {
+            background-color: #ffffff;
+            color: #333 !important;
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer a {
+            color: #333 !important;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: #333d81 !important;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        /* Social media icon styling for footer */
+        .social-icons img {
+            width: 30px; 
+            height: 30px;
+            margin-right: 5px; 
+        }
+
+        /* General alignment styling */
+        .right{
+          float: right;
+        }
+        .left{
+          float: left;
+        }
+
+        /* Styling for property images */
+        .property_img {
+          max-width: 100%; /* Ensure the image does not exceed the container width */
+          max-height: 255px; /* Set a maximum height for consistency */
+          width: auto; /* Maintain aspect ratio */
+          height: auto; /* Allow the image to resize proportionally */
+          display: block; /* Ensure proper display */
+          margin: 0 auto; /* Center the image horizontally */
+          border-radius: 8px; /* Add rounded corners for a softer look */
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+          transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+        }
+        
+        /* Generic styling for our applications motto */
+        .motto p {
+          text-align: left; /* Center-aligns the content */
+          font-family: Arial, sans-serif; /* Choose a suitable font-family */
+          color: #333; /* Adjust text color */
+          font-size: 24px; /* Adjust the font size as needed */
+          font-style: italic; /* Emphasize the motto with italics */
+          margin-top: 10px;
+        }
+
+        /* Generic padding styling */
+        .padding{
+          padding: 0px 0px 20px 30px !important;
+        }
+
+        /* Container used to align */
+        .products-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          margin: auto auto 15px auto !important
+          
+      }
+
+        /* Styling for the property */
+        .product {
+            width: 48%; 
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #dadada; /* Light grey color */
+            border-radius: 10px; /* softer edges */
+            padding: 20px; /*  padding for content spacing */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* slight shadow for depth */
+        }
+
+        /* Generic application button styling */
+        .apply-button {
+            display: block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Alignment for property image */
+        .icon {
+            float: right; /* Aligns the icon to the right */
+            margin-left: 10px; /* Adds some space between text and icon */
+            padding: 5px;
+            border-radius: 100px;
+        }
+        
+        /* Container for property image */
+        .icon-box {
+            padding: 5px;
+            border-radius: 100px;
+        }
+
+        /* Generic image alignment container */
+        .image-container {
+          display: flex;
+          justify-content: center;
+        }
+
+        /* Generic button styling */
+        .button-3 {
+          height: 80px;
+          width: 320px;
+          appearance: none;
+          background-color: #2ea44f;
+          border: 1px solid rgba(27, 31, 35, .15);
+          border-radius: 6px;
+          box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+          box-sizing: border-box;
+          color: #fff;
+          cursor: pointer;
+          display: inline-block;
+          font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+          font-size: 20px;
+          font-weight: 600;
+          line-height: 20px;
+          padding: 6px 16px;
+          position: relative;
+          text-align: center;
+          text-decoration: none;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          vertical-align: middle;
+          white-space: nowrap;
+        }
+        .button-3:focus:not(:focus-visible):not(.focus-visible) {
+          box-shadow: none;
+          outline: none;
+        }
+        .button-3:hover {
+          background-color: #2c974b;
+        }
+        .button-3:focus {
+          box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+          outline: none;
+        }
+        .button-3:disabled {
+          background-color: #94d3a2;
+          border-color: rgba(27, 31, 35, .1);
+          color: rgba(255, 255, 255, .8);
+          cursor: default;
+        }
+        .button-3:active {
+          background-color: #298e46;
+          box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+        }
+
+        /* Generic page divider to break up sections (Grey horizontal line)*/
+        .divider {
+          width: 100%;
+          height: 1px; /* Adjust height as needed */
+          background-color: #626060; /* Color of the divider */
+          margin: 20px 0; /* Adjust margin as needed for spacing */
+      }
+
+      /* Generic property image alignment styling */
+      .product-image {
+          float: right;
+          margin-right: 10%;
+      }
+
+      /* Container for application section in Listing hub */
+      .application-section {
+          background-color: #5fc633;
+          color: rgb(0, 0, 0);
+          padding: 8px;
+          width: 50%;
+          border-radius: 20px;
+      }
+
+      </style>
+
+  <!-- Import bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="UTF-8">
+  
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+
+          <!-- Navigate to homepage/dashboard -->
+          <div class="navbar-brand">
+            <a href="/" class="logo">ScholarHomes</a>
+          </div>
+
+          <!-- If screen dimension is too small to show nav bar, show clickable dropdown image -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><img src="../media/site-images/menu.png" height="100%" width="100%"></img></span>
+          </button>
+
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              <!-- If user is logged in, let view profile -->
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/view_profile/{{ request.user.id }}">My Profile</a>
+              </li>
+              {% endif %}
+
+              <!-- sign in -->
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/login/">Login</a>
+              </li>
+
+              <!-- If user is logged in, show log out -->
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="/logout/">Logout</a>
+              </li>
+              {% endif %}
+
+              <!-- Dropdown list when Register As is clicked -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Register As
+                </a>
+                <ul class="dropdown-menu">
+                  <div class="black-text">
+                    <!-- Register as lister -->
+                    <li><a class="dropdown-item" color="black"!important href="/registerPropLister/">Accommodation Lister</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <!-- Register as seeker -->
+                    <li><a class="dropdown-item" href="/registerstudent">Accommodation Seeker</a></li>
+                  </div>
+                </ul>
+              </li>
+            </ul>
+            <div class="d-flex">
+              
+            </div>
+          </div>
+        </div>
+      </nav>
+    
+</head>
+<body>
+
+<!-- Content block will be filled by children templates -->
+<div class="content">
+{% block content %}
+
+{% endblock %}
+</div>
+
+  <!-- JS bootstrapped used in children templates -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">   
+    </script>
+</body>
+
+<!-- footers -->
+<div class="footer">
+
+  <p>&copy; 2024 Scholar Homes</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <!-- Social media Icon Links -->
+  <div class="social-icons">
+      <a href="https://www.facebook.com/" target="_blank"><img src="../media/site-images/facebook.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/" target="_blank"><img src="../media/site-images/instagram.png" alt="Instagram"></a>
+      <a href="https://www.linkedin.com/" target="_blank"><img src="../media/site-images/linkedin.png" alt="LinkedIn"></a>
+  </div>
+
+</div>
+
+</html>

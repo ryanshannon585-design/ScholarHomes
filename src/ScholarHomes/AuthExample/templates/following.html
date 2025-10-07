@@ -1,0 +1,49 @@
+<!-- This template is an exstension of the HTML and CSS in Base.html -->
+{% extends 'base.html' %}
+
+<!-- Title of the webpages -->
+{% block title %}
+    Users {{ user.username }} is following
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br>
+            <div class="p-5 mb-4 bg-light rounded-3">
+                <!-- Show the number of users the user is following and a link back to user's profile -->
+                <h1><a href="/view_profile/{{ user.id }}" class="blue-text">{{ user.username }}</a> is  Following: <span class="text-primary font-italic me-1">{{ user.following_count }}</span></h1>
+                <ul>
+                    <!-- For every person User is following -->
+                    {% for follower in following %}
+                    <div class="container">
+                        <div class="divider"></div>
+                        <div class="row align-items-md-stretch">
+                            <div class="col-md-6">
+                                <!-- Display their profile Image if user uploaded one -->
+                                {% if follower.followed_user.student_profile.profile_image %}
+                                    <img src="{{follower.followed_user.student_profile.profile_image.url}}" alt="profile image"
+                                    class="rounded-circle img-fluid" style="width: 150px;">
+                                <!-- Else show the default profile image -->
+                                {% else %}
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                                    class="rounded-circle img-fluid" style="width: 150px;">
+                                {% endif %}
+                            </div>
+                            <!-- Show follower details -->
+                            <div class="col-md-6">
+                                <br>
+                                <p><span class="bold">Username:</span> {{ follower.followed_user.username }}</p>
+                                
+                                <p><span class="bold">User-Type:</span> {%if follower.followed_user.is_student == True %}Seeker{%else%}Lister{%endif%}</p>
+                                
+                                <p><span class="bold">University:</span> {{ follower.followed_user.student_profile.university }}</p>
+                                 <!-- View followers profile -->
+                                <a href="/view_profile/{{ follower.followed_user.id }}"><button class="btn btn-outline-secondary" type="button">View Profile</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </ul>
+            </div>
+    </div>
+{% endblock %}
